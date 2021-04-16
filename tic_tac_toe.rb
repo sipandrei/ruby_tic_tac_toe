@@ -62,7 +62,18 @@ class Board
     end
   end
 
+  def draw_end
+    if draw?
+      @game_over = true
+      puts "It's a draw!"
+    end
+  end
+
   private
+
+  def draw?
+    true unless @board.flatten.include?('.')
+  end
 
   def won_diag?(character)
     num = 0
@@ -115,10 +126,12 @@ until game_board.game_over == true
   player1.next_move
   game_board.update_board(player1)
   game_board.end_game(player1)
+  game_board.draw_end
 
   break if game_board.game_over
 
   player2.next_move
   game_board.update_board(player2)
   game_board.end_game(player2)
+  game_board.draw_end
 end
